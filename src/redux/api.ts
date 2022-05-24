@@ -5,8 +5,8 @@ export interface Employee {
     id: number
     name: string
     salary: number
-    age: number
-    birthdate: Date
+    birthdate: string
+    gender: string
 }
 
 // Fetch the Employee
