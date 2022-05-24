@@ -1,41 +1,23 @@
-import { useState } from 'react'
-import logo from './logo.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from './redux/store'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch()
+  const { loading, employees, error } = useSelector((state: RootState) => state.employee)
+
+  useEffect(() => {
+    console.log('useEffect ran', employees);
+    dispatch({ type: 'employee/getEmployeesStart' })
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p>Welcome to Addis Software</p>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
+          {loading ? 'Loading...' : error ? 'Error' : employees.map((employee) => employee.name).join(', ')}
         </p>
       </header>
     </div>

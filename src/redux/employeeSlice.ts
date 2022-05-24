@@ -4,7 +4,7 @@ import { Employee } from './api'
 const employeeSlice = createSlice({
     name: 'employee',
     initialState: {
-        list: [] as Employee[],
+        employees: [] as Employee[],
         loading: false,
         error: null as string | null,
     },
@@ -12,11 +12,10 @@ const employeeSlice = createSlice({
         getEmployeesStart: (state) => {
             state.loading = true
             state.error = null
-        }
-        ,
+        },
         getEmployeesSuccess: (state, action: PayloadAction<Employee[]>) => {
             state.loading = false
-            state.list = action.payload
+            state.employees = action.payload
             state.error = null
         },
         getEmployeesFailure: (state, action: PayloadAction<string>) => {

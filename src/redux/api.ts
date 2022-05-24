@@ -9,7 +9,7 @@ export interface Employee {
     birthdate: Date
 }
 
-// Fetch the Employee from the API and cast it to json object
+// Fetch the Employee
 export const getEmployees = async (): Promise<Employee[]> => {
     const response = await fetch(BASE_URL)
     return await response.json()
