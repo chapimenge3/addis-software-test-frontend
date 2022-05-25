@@ -5,7 +5,7 @@ export interface Employee {
     id: number
     name: string
     salary: number
-    birthdate: string
+    birthdate: Date
     gender: string
 }
 
@@ -28,5 +28,28 @@ export const deleteEmployee = async (id: number): Promise<void> => {
     })
 }
 
+// update employee
+export const updateEmployee = async (id: number, employee: Employee): Promise<void> => {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(employee)
+    })
+    return await response.json()
+}
+
+// Create Employee
+export const createEmployee = async (employee: Employee): Promise<void> => {
+    const response = await fetch(BASE_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(employee)
+    })
+    return await response.json()
+}
 
 export default Employee;

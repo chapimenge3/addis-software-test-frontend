@@ -9,6 +9,7 @@ import {
 } from "./components/table.style";
 import { Redirect, Link } from "react-router-dom";
 import { StyledLink } from "./components/links.style";
+import { StyledButton } from "./components/button.style";
 
 function Homepage() {
   const dispatch = useDispatch();
@@ -35,6 +36,10 @@ function Homepage() {
     <div className="Homepage">
       <header className="Homepage-header">
         <p>Welcome to Addis Software</p>
+        <br />
+        <StyledButton primary>
+          Add Employee
+        </StyledButton>
         {/* Show employee details for all of the employees */}
         {loading ? "Loading..." : error ? error : ""}
         {!loading && employees ? (
@@ -57,7 +62,7 @@ function Homepage() {
                     <ExployeeData>{emplyee.name}</ExployeeData>
                     <ExployeeData>{emplyee.salary}</ExployeeData>
                     <ExployeeData>{emplyee.gender}</ExployeeData>
-                    <ExployeeData>{emplyee.birthdate}</ExployeeData>
+                    <ExployeeData>{emplyee.birthdate.toString()}</ExployeeData>
                     <ExployeeData>
                       <StyledLink to={`/${emplyee.id}`}>Details</StyledLink>
                     </ExployeeData>

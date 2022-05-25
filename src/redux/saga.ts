@@ -1,6 +1,6 @@
 // make a redux-saga methods to request the Employee
 import { put, takeEvery } from 'redux-saga/effects'
-import { Employee, getEmployees, getEmployeesDetails, deleteEmployee } from './api'
+import { Employee, getEmployees, getEmployeesDetails, deleteEmployee, updateEmployee, createEmployee } from './api'
 import { getEmployeesSuccess, getEmployeesFailure } from './employeeSlice'
 import { getEmployeeDetailsSuccess, getEmployeeDetailsFailure, deleteEmployeeSuccess, deleteEmployeeFailure } from './EmployeeDetailsSlice'
 
@@ -34,10 +34,32 @@ export function* deleteEmployeeAction(action: any) {
     }
 }
 
-    // Root Saga for watching all the actions
-    export function* rootSaga() {
-        yield takeEvery('employee/getEmployeesStart', getEmployeesAction)
-        yield takeEvery('emplyeeDetails/getEmployeeDetailsStart', getEmployeeDetailsAction)
-        yield takeEvery('emplyeeDetails/deleteEmployeeStart', deleteEmployeeAction)
-
+// Define the redux-saga for updating employee
+export function* updateEmployeeAction(action: any) {
+    try {
+        const employee: Employee = yield updateEmployee(action.payload.id, action.payload.employee)
+        yield put(getEmployeeDetailsSuccess(employee))
+    } catch (error: any) {
+        yield put(getEmployeeDetailsFailure(error.message))
     }
+}
+
+// Define the redux-saga for creating employee
+export function* createEmployeeAction(action: any) {
+    try {
+        const employee: Employee = yield createEmployee(action.payload.employee)
+        yield put(getEmployeeDetailsSuccess(employee))
+    } catch (error: any) {
+        yield put(getEmployeeDetailsFailure(error.message))
+    }
+}
+
+    
+// Root Saga for watching all the actions
+export function* rootSaga() {
+    yield takeEvery('employee/getEmployeesStart', getEmployeesAction)
+    yield takeEvery('emplyeeDetails/getEmployeeDetailsStart', getEmployeeDetailsAction)
+    yield takeEvery('emplyeeDetails/deleteEmployeeStart', deleteEmployeeAction)
+    yield takeEvery('emplyeeDetails/updateEmployeeStart', updateEmployeeAction)
+    yield takeEvery('emplyeeDetails/createEmployeeStart', createEmployeeAction)
+}

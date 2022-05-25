@@ -34,6 +34,14 @@ const EmployeeDetailsSlice = createSlice({
             state.loading = false
             state.error = action.payload
         },
+        updateEmployeeStart: (state) => {
+            state.loading = true
+            state.error = null
+        },
+        createEmployeeStart: (state) => {
+            state.loading = true
+            state.error = null
+        }
     }
 })
 
