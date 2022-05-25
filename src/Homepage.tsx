@@ -22,22 +22,12 @@ function Homepage() {
     dispatch({ type: "employee/getEmployeesStart" });
   }, []);
 
-  const handleOnClick = (id: any) => {
-    return (
-      <Redirect
-        to={{
-          pathname: "/" + id,
-        }}
-      />
-    );
-  };
-
   return (
     <div className="Homepage">
       <header className="Homepage-header">
         <p>Welcome to Addis Software</p>
         <br />
-        <StyledLink to={`./create/`}>
+        <StyledLink to={`/addis-software-test-frontend/create/`}>
           Add Employee
         </StyledLink>
         {/* Show employee details for all of the employees */}
@@ -64,7 +54,7 @@ function Homepage() {
                     <ExployeeData>{emplyee.gender}</ExployeeData>
                     <ExployeeData>{emplyee.birthdate.toString()}</ExployeeData>
                     <ExployeeData>
-                      <StyledLink to={`./${emplyee.id}`}>Details</StyledLink>
+                      <StyledLink to={`/addis-software-test-frontend/${emplyee.id}`}>Details</StyledLink>
                     </ExployeeData>
                   </EmployeeRow>
                 ))}
