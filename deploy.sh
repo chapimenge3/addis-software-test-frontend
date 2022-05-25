@@ -12,9 +12,8 @@ cd dist
 echo 'https://chapimenge.me' > CNAME
 
 git init
-git checkout -b deploy
+git checkout -b main
 git add -A
 git commit -m 'deploy'
-
 
 cd -
