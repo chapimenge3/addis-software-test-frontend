@@ -21,5 +21,12 @@ export const getEmployeesDetails = async (id: number): Promise<Employee> => {
     return await response.json()
 }
 
+// delete employee
+export const deleteEmployee = async (id: number): Promise<void> => {
+    await fetch(`${BASE_URL}/${id}`, {
+        method: "DELETE"
+    })
+}
+
 
 export default Employee;

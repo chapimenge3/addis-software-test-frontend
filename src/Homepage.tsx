@@ -7,6 +7,8 @@ import {
   ExployeeData,
   ExployeesTable,
 } from "./components/table.style";
+import { Redirect, Link } from "react-router-dom";
+import { StyledLink } from "./components/links.style";
 
 function Homepage() {
   const dispatch = useDispatch();
@@ -19,13 +21,24 @@ function Homepage() {
     dispatch({ type: "employee/getEmployeesStart" });
   }, []);
 
+  const handleOnClick = (id: any) => {
+    return (
+      <Redirect
+        to={{
+          pathname: "/" + id,
+        }}
+      />
+    );
+  };
+
   return (
     <div className="Homepage">
       <header className="Homepage-header">
         <p>Welcome to Addis Software</p>
-          {/* Show employee details for all of the employees */}
-          {loading ? "Loading..." : error ? error : ""}
-          {!loading && employees ? (
+        {/* Show employee details for all of the employees */}
+        {loading ? "Loading..." : error ? error : ""}
+        {!loading && employees ? (
+          <div>
             <ExployeesTable>
               <thead>
                 <EmployeeRow>
@@ -34,6 +47,7 @@ function Homepage() {
                   <EmployeeHeader>Salary</EmployeeHeader>
                   <EmployeeHeader>Gender</EmployeeHeader>
                   <EmployeeHeader>Birth Date</EmployeeHeader>
+                  <EmployeeHeader>Action</EmployeeHeader>
                 </EmployeeRow>
               </thead>
               <tbody>
@@ -44,13 +58,18 @@ function Homepage() {
                     <ExployeeData>{emplyee.salary}</ExployeeData>
                     <ExployeeData>{emplyee.gender}</ExployeeData>
                     <ExployeeData>{emplyee.birthdate}</ExployeeData>
+                    <ExployeeData>
+                      <StyledLink to={`/${emplyee.id}`}>Details</StyledLink>
+                    </ExployeeData>
                   </EmployeeRow>
                 ))}
               </tbody>
             </ExployeesTable>
-          ) : (
-            ""
-          )}
+            {/* TODO Pagination */}
+          </div>
+        ) : (
+          ""
+        )}
       </header>
     </div>
   );
