@@ -3,7 +3,7 @@ const BASE_URL = "https://628d249ca3fd714fd03ff793.mockapi.io/api/employee/Emplo
 
 export interface Employee {
     id: number | null
-    name: string 
+    name: string
     salary: number
     birthdate: Date
     gender: string
@@ -12,13 +12,20 @@ export interface Employee {
 // Fetch the Employee
 export const getEmployees = async (): Promise<Employee[]> => {
     const response = await fetch(BASE_URL)
-    return await response.json()
+    const data = await response.json()
+    // change the datetime field to Date type
+    data.forEach((employee: any) => {
+        employee.birthdate = new Date(employee.birthdate)
+    })
+    return data
 }
 
 // Fetch Employee Details 
 export const getEmployeesDetails = async (id: number): Promise<Employee> => {
     const response = await fetch(`${BASE_URL}/${id}`)
-    return await response.json()
+    const data =  await response.json()
+    data.birthdate = new Date(data.birthdate)
+    return data
 }
 
 // delete employee
@@ -43,7 +50,7 @@ export const updateEmployee = async (id: number, employee: Employee): Promise<Em
 // Create Employee
 export const createEmployee = async (employee: Employee): Promise<Employee> => {
     console.log('Create Employee', JSON.stringify(employee));
-    
+
     const response = await fetch(BASE_URL, {
         method: "POST",
         headers: {
