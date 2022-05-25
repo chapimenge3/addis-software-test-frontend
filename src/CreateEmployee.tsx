@@ -41,7 +41,7 @@ function CreateEmployee() {
       type: "emplyeeDetails/createEmployeeStart",
       payload: { employee },
     });
-    history.push("/");
+    history.push("/addis-software-test-frontend");
   };
 
   return (

@@ -52,7 +52,7 @@ function EmployeeDetails() {
     console.log("delete employee", id);
     dispatch({ type: "emplyeeDetails/deleteEmployeeStart", payload: { id } });
     // alert delete is successful and redirect to home page
-    history.push("/");
+    history.push("/addis-software-test-frontend");
   };
 
   // Change the edit state whenever the edit button or cancel button clicked 
