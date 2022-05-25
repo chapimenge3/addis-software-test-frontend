@@ -2,6 +2,8 @@ import "./App.css";
 import Homepage from "./Homepage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import EmployeeDetails from "./EmployeeDetail";
+import CreateEmployee from "./CreateEmployee";
+
 
 function App() {
   return (
@@ -10,6 +12,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Homepage></Homepage>
+          </Route>
+          <Route path="/create" exact>
+            <CreateEmployee></CreateEmployee>
           </Route>
           <Route path="/:id" exact>
             <EmployeeDetails></EmployeeDetails>

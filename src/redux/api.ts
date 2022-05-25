@@ -2,8 +2,8 @@
 const BASE_URL = "https://628d249ca3fd714fd03ff793.mockapi.io/api/employee/Employee"
 
 export interface Employee {
-    id: number
-    name: string
+    id: number | null
+    name: string 
     salary: number
     birthdate: Date
     gender: string
@@ -29,7 +29,7 @@ export const deleteEmployee = async (id: number): Promise<void> => {
 }
 
 // update employee
-export const updateEmployee = async (id: number, employee: Employee): Promise<void> => {
+export const updateEmployee = async (id: number, employee: Employee): Promise<Employee> => {
     const response = await fetch(`${BASE_URL}/${id}`, {
         method: "PUT",
         headers: {
@@ -41,7 +41,9 @@ export const updateEmployee = async (id: number, employee: Employee): Promise<vo
 }
 
 // Create Employee
-export const createEmployee = async (employee: Employee): Promise<void> => {
+export const createEmployee = async (employee: Employee): Promise<Employee> => {
+    console.log('Create Employee', JSON.stringify(employee));
+    
     const response = await fetch(BASE_URL, {
         method: "POST",
         headers: {

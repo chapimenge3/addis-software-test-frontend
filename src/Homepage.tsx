@@ -37,9 +37,9 @@ function Homepage() {
       <header className="Homepage-header">
         <p>Welcome to Addis Software</p>
         <br />
-        <StyledButton primary>
+        <StyledLink to={`create/`}>
           Add Employee
-        </StyledButton>
+        </StyledLink>
         {/* Show employee details for all of the employees */}
         {loading ? "Loading..." : error ? error : ""}
         {!loading && employees ? (
