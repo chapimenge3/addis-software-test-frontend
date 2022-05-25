@@ -10,13 +10,13 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route exact path="/addis-software-test-frontend">
+          <Route exact path="/">
             <Homepage></Homepage>
           </Route>
-          <Route path="/addis-software-test-frontend/create" exact>
+          <Route path="/create" exact>
             <CreateEmployee></CreateEmployee>
           </Route>
-          <Route path="/addis-software-test-frontend/:id" exact>
+          <Route path="/:id" exact>
             <EmployeeDetails></EmployeeDetails>
           </Route>
         </Switch>
