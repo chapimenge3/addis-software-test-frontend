@@ -15,4 +15,11 @@ export const getEmployees = async (): Promise<Employee[]> => {
     return await response.json()
 }
 
-export default {}
+// Fetch Employee Details 
+export const getEmployeesDetails = async (id: number): Promise<Employee> => {
+    const response = await fetch(`${BASE_URL}/${id}`)
+    return await response.json()
+}
+
+
+export default Employee;
