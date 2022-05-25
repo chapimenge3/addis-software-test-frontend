@@ -44,7 +44,9 @@ export const updateEmployee = async (id: number, employee: Employee): Promise<Em
         },
         body: JSON.stringify(employee)
     })
-    return await response.json()
+    const data =  await response.json()
+    data.birthdate = new Date(data.birthdate)
+    return data
 }
 
 // Create Employee
