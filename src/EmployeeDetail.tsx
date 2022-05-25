@@ -27,7 +27,7 @@ function EmployeeDetails() {
 
   // Intializing the Employee state(called only once)
   useEffect(() => {
-    console.log("useEffect ran");
+    console.log("EmployeeDetails useEffect ran");
     // dispath the employeeDetails action with employee id as parameter
     dispatch({
       type: "emplyeeDetails/getEmployeeDetailsStart",

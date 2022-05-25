@@ -18,7 +18,7 @@ function Homepage() {
   );
 
   useEffect(() => {
-    console.log("useEffect ran", employees);
+    console.log("Homepage useEffect ran", employees);
     dispatch({ type: "employee/getEmployeesStart" });
   }, []);
 
