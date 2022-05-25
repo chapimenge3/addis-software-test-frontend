@@ -21,9 +21,9 @@ export const EmployeeHeader = styled.th`
 
 export const EmployeeRow = styled.tr`
 &:nth-child(even){
-    background-color: black;
+    background-color: #f2f2f2;
 }
 &:hover{
-    background-color: grey;
+    background-color: #ddd;
 }
 `
