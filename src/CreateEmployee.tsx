@@ -46,7 +46,7 @@ function CreateEmployee() {
 
   return (
     <div>
-      <StyledLink to="/">Home</StyledLink>
+      <StyledLink to="/addis-software-test-frontend">Home</StyledLink>
       <h1>Create Employee</h1>
       <form onSubmit={onSubmit}>
         <input

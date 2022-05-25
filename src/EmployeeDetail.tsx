@@ -82,7 +82,7 @@ function EmployeeDetails() {
 
   return (
     <div>
-      <StyledLink to="/">Home</StyledLink>
+      <StyledLink to="/addis-software-test-frontend">Home</StyledLink>
       <h1>Employee details for {employee && employee.name}</h1>
       {/* Show Employee Details */}
       {loading ? "Loading..." : error ? error : ""}

@@ -37,7 +37,7 @@ function Homepage() {
       <header className="Homepage-header">
         <p>Welcome to Addis Software</p>
         <br />
-        <StyledLink to={`create/`}>
+        <StyledLink to={`./create/`}>
           Add Employee
         </StyledLink>
         {/* Show employee details for all of the employees */}
@@ -64,7 +64,7 @@ function Homepage() {
                     <ExployeeData>{emplyee.gender}</ExployeeData>
                     <ExployeeData>{emplyee.birthdate.toString()}</ExployeeData>
                     <ExployeeData>
-                      <StyledLink to={`/${emplyee.id}`}>Details</StyledLink>
+                      <StyledLink to={`./${emplyee.id}`}>Details</StyledLink>
                     </ExployeeData>
                   </EmployeeRow>
                 ))}
