@@ -31,7 +31,7 @@ function CreateEmployee() {
     // construct employee object
     const employee: Employee = {
       name: newEmployee.name,
-      salary: newEmployee.salary,
+      salary: Number(newEmployee.salary),
       gender: newEmployee.gender,
       birthdate: newEmployee.birthdate,
       id: null,
