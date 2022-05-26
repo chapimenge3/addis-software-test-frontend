@@ -22,8 +22,6 @@ function CreateEmployee() {
       ...newEmployee,
       [e.target.name]: e.target.value,
     });
-    console.log("onChange", e.target.value);
-    console.log("newEmployee", newEmployee);
   };
 
   const onSubmit = (e: any) => {
@@ -36,7 +34,6 @@ function CreateEmployee() {
       birthdate: newEmployee.birthdate,
       id: null,
     };
-    console.log("onSubmit", employee);
     dispatch({
       type: "emplyeeDetails/createEmployeeStart",
       payload: { employee },

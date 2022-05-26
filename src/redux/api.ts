@@ -86,7 +86,6 @@ export const updateEmployee = async (id: number, employee: Employee): Promise<Em
 
 // Create Employee
 export const createEmployee = async (employee: Employee): Promise<Employee> => {
-    console.log('Create Employee', JSON.stringify(employee));
 
     const response = await fetch(BASE_URL, {
         method: "POST",

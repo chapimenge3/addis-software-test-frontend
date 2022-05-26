@@ -27,7 +27,6 @@ function EmployeeDetails() {
 
   // Intializing the Employee state(called only once)
   useEffect(() => {
-    console.log("EmployeeDetails useEffect ran");
     // dispath the employeeDetails action with employee id as parameter
     dispatch({
       type: "emplyeeDetails/getEmployeeDetailsStart",
@@ -37,7 +36,6 @@ function EmployeeDetails() {
 
   // change setEmployeeToEdit whenver the employee changes
   useEffect(() => {
-    console.log("Changes", employee?.birthdate);
     setEmployeeToEdit({
       id: employee?.id,
       name: employee?.name,
@@ -49,7 +47,6 @@ function EmployeeDetails() {
 
   // Handler for Deleting Employee
   const handleDelete = () => {
-    console.log("delete employee", id);
     dispatch({ type: "emplyeeDetails/deleteEmployeeStart", payload: { id } });
     // alert delete is successful and redirect to home page
     history.push("/addis-software-test-frontend");
@@ -57,13 +54,11 @@ function EmployeeDetails() {
 
   // Change the edit state whenever the edit button or cancel button clicked 
   const handleEditButton = () => {
-    console.log("Edit Button", typeof employeeToEdit.birthdate, employeeToEdit.birthdate);
     setEdit(!edit);
   };
 
   // Change the input value for form input
   const onChange = (e: any) => {
-    console.log("onChange", e.target.value);
     if(e.target.name === "birthdate"){
       setEmployeeToEdit({
         ...employeeToEdit,

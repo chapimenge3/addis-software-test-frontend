@@ -25,7 +25,6 @@ function Homepage() {
   } = useSelector((state: RootState) => state.employee);
 
   useEffect(() => {
-    console.log("Homepage useEffect ran", employees);
     dispatch({
       type: "employee/getEmployeesStart",
       payload: { params: { page, limit, offset, sort } },
@@ -47,7 +46,6 @@ function Homepage() {
   };
 
   const handleSort = (event:any) => {
-    console.log("sort", event.target.value);
     dispatch({
       type: "employee/getEmployeesStart",
       payload: { params: { page: page, limit, offset, sort: event.target.value } },
@@ -55,7 +53,6 @@ function Homepage() {
   };
 
   const handleSearch = (event:any) => {
-    console.log("search", event.target.value);
     dispatch({
       type: "employee/getEmployeeSearchStart",
       payload: { params: { page: page, limit, offset, sort, name: event.target.value } },
