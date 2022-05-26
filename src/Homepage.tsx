@@ -7,20 +7,60 @@ import {
   ExployeeData,
   ExployeesTable,
 } from "./components/table.style";
-import { Redirect, Link } from "react-router-dom";
 import { StyledLink } from "./components/links.style";
 import { StyledButton } from "./components/button.style";
 
 function Homepage() {
   const dispatch = useDispatch();
-  const { loading, employees, error } = useSelector(
-    (state: RootState) => state.employee
-  );
+  const {
+    loading,
+    employees,
+    error,
+    page,
+    offset,
+    limit,
+    hasPrevPage,
+    hasNextPage,
+    sort
+  } = useSelector((state: RootState) => state.employee);
 
   useEffect(() => {
     console.log("Homepage useEffect ran", employees);
-    dispatch({ type: "employee/getEmployeesStart" });
+    dispatch({
+      type: "employee/getEmployeesStart",
+      payload: { params: { page, limit, offset, sort } },
+    });
   }, []);
+
+  const handlePrevPage = () => {
+    dispatch({
+      type: "employee/getEmployeesStart",
+      payload: { params: { page: page ? page - 1 : 1, limit, offset, sort } },
+    });
+  };
+
+  const handleNextPage = () => {
+    dispatch({
+      type: "employee/getEmployeesStart",
+      payload: { params: { page: page ? page + 1 : 1, limit, offset, sort } },
+    });
+  };
+
+  const handleSort = (event:any) => {
+    console.log("sort", event.target.value);
+    dispatch({
+      type: "employee/getEmployeesStart",
+      payload: { params: { page: page, limit, offset, sort: event.target.value } },
+    });
+  };
+
+  const handleSearch = (event:any) => {
+    console.log("search", event.target.value);
+    dispatch({
+      type: "employee/getEmployeeSearchStart",
+      payload: { params: { page: page, limit, offset, sort, name: event.target.value } },
+    });
+  };
 
   return (
     <div className="Homepage">
@@ -34,6 +74,23 @@ function Homepage() {
         {loading ? "Loading..." : error ? error : ""}
         {!loading && employees ? (
           <div>
+            {/* Show dropdown for sort */}
+            <div>
+              Sorty By
+              <select onChange={handleSort} value={`${sort || 'name'}`}>
+                <option value="name">Name</option>
+                <option value="gender">Gender</option>
+              </select>
+            </div>
+            <br />
+            {/* search input */}
+            <div>
+              <input
+                type="text"
+                placeholder="Search"
+                onChange={handleSearch}
+              />
+            </div>
             <ExployeesTable>
               <thead>
                 <EmployeeRow>
@@ -54,13 +111,26 @@ function Homepage() {
                     <ExployeeData>{emplyee.gender}</ExployeeData>
                     <ExployeeData>{emplyee.birthdate.toString()}</ExployeeData>
                     <ExployeeData>
-                      <StyledLink to={`/addis-software-test-frontend/${emplyee.id}`}>Details</StyledLink>
+                      <StyledLink
+                        to={`/addis-software-test-frontend/${emplyee.id}`}
+                      >
+                        Details
+                      </StyledLink>
                     </ExployeeData>
                   </EmployeeRow>
                 ))}
               </tbody>
             </ExployeesTable>
             {/* TODO Pagination */}
+
+            <div className="Homepage-pagination">
+              {hasPrevPage && (
+                <StyledButton onClick={handlePrevPage}>Prev</StyledButton>
+              )}
+              {hasNextPage && (
+                <StyledButton onClick={handleNextPage}>Next</StyledButton>
+              )}
+            </div>
           </div>
         ) : (
           ""
