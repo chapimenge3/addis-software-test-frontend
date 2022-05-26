@@ -1,4 +1,3 @@
-// Define baseurl const to https://628d249ca3fd714fd03ff793.mockapi.io/api/employee/Employee
 const BASE_URL = "https://wuz792tp80.execute-api.us-east-1.amazonaws.com/dev"
 
 export interface Employee {
