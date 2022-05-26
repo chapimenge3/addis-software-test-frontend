@@ -84,6 +84,8 @@ function EmployeeDetails() {
     const emp = {
       ...employeeToEdit
     } as Employee
+    // change salary to number
+    emp.salary = Number(emp.salary);
     dispatch({ type: "emplyeeDetails/updateEmployeeStart", payload: { id: id, employee: emp } });
     setEdit(false);
   }
@@ -106,7 +108,6 @@ function EmployeeDetails() {
               {/* Human readable date time */}
               <p>Birthdate: {employee.birthdate.toLocaleString() }</p>
               {/* Date time html tag */}
-              
             </div>
           ) : (
             <form onSubmit={onSubmit}>
