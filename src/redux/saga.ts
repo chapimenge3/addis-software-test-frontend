@@ -1,14 +1,16 @@
 // make a redux-saga methods to request the Employee
 import { put, takeEvery } from 'redux-saga/effects'
-import { Employee, getEmployees, getEmployeesDetails, deleteEmployee, updateEmployee, createEmployee } from './api'
+import { Response, Employee, getEmployees, getEmployeesDetails, deleteEmployee, updateEmployee, createEmployee } from './api'
 import { getEmployeesSuccess, getEmployeesFailure } from './employeeSlice'
 import { getEmployeeDetailsSuccess, getEmployeeDetailsFailure, deleteEmployeeSuccess, deleteEmployeeFailure } from './EmployeeDetailsSlice'
 
 // Define the redux-saga for getting employee
-export function* getEmployeesAction() {
+export function* getEmployeesAction(action: any) {
     try {
-        const employees: Employee[] = yield getEmployees()
-        yield put(getEmployeesSuccess(employees))
+        const response: Response = yield getEmployees(action.payload.params) 
+        // add sort to the response
+        response.sort = action.payload.params.sort  
+        yield put(getEmployeesSuccess(response))
     } catch (error: any) {
         yield put(getEmployeesFailure(error.message))
     }
@@ -58,6 +60,7 @@ export function* createEmployeeAction(action: any) {
 // Root Saga for watching all the actions
 export function* rootSaga() {
     yield takeEvery('employee/getEmployeesStart', getEmployeesAction)
+    yield takeEvery('employee/getEmployeeSearchStart', getEmployeesAction)
     yield takeEvery('emplyeeDetails/getEmployeeDetailsStart', getEmployeeDetailsAction)
     yield takeEvery('emplyeeDetails/deleteEmployeeStart', deleteEmployeeAction)
     yield takeEvery('emplyeeDetails/updateEmployeeStart', updateEmployeeAction)

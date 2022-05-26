@@ -57,17 +57,25 @@ function EmployeeDetails() {
 
   // Change the edit state whenever the edit button or cancel button clicked 
   const handleEditButton = () => {
-    console.log("Edit Button");
+    console.log("Edit Button", typeof employeeToEdit.birthdate, employeeToEdit.birthdate);
     setEdit(!edit);
   };
 
   // Change the input value for form input
   const onChange = (e: any) => {
     console.log("onChange", e.target.value);
-    setEmployeeToEdit({
-      ...employeeToEdit,
-      [e.target.name]: e.target.value,
-    });
+    if(e.target.name === "birthdate"){
+      setEmployeeToEdit({
+        ...employeeToEdit,
+        [e.target.name]: new Date(e.target.value)
+      });
+    }
+    else{
+      setEmployeeToEdit({
+        ...employeeToEdit,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   // Handler for editing employee
@@ -95,7 +103,8 @@ function EmployeeDetails() {
               <p>Name: {employee.name}</p>
               <p>Salary: {employee.salary}</p>
               <p>Gender: {employee.gender}</p>
-              <p>Birthdate: {employee.birthdate.toString()}</p>
+              {/* Human readable date time */}
+              <p>Birthdate: {employee.birthdate.toLocaleString() }</p>
               {/* Date time html tag */}
               
             </div>
@@ -131,8 +140,9 @@ function EmployeeDetails() {
               <br />
               {/* Show Date input */}
               <input
-                type="datetime"
-                value={employeeToEdit.birthdate?.toString()}
+                type="date"
+                // assign a intial value 
+                value={employeeToEdit.birthdate && employeeToEdit.birthdate.toISOString().split("T")[0]}
                 onChange={(e) => onChange(e)}
                 name="birthdate"
                 placeholder="Birthdate"
